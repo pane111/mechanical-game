@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmhkte6mfwgf8"]
+
+[ext_resource type="Script" uid="uid://crxwciih1r0iw" path="res://assets/scenes/prefabs/explosion.gd" id="1_2j7b0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0wmh"]
+shading_mode = 0
+albedo_color = Color(0.92066336, 0.49543208, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_i0wmh"]
+material = SubResource("StandardMaterial3D_i0wmh")
+
+[sub_resource type="Animation" id="Animation_x8moa"]
+resource_name = "expand"
+length = 0.5
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.5, 1, 30, 30, 30)
+
+[sub_resource type="Animation" id="Animation_3qxwe"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lmk6o"]
+_data = {
+&"RESET": SubResource("Animation_3qxwe"),
+&"expand": SubResource("Animation_x8moa")
+}
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_2j7b0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_i0wmh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lmk6o")
+}
+autoplay = "expand"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

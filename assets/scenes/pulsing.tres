@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bwtgpfx2lu8gc"]
+
+[ext_resource type="Shader" uid="uid://bxjffepvbiom" path="res://pulsing.gdshader" id="1_jghpn"]
+[ext_resource type="Texture2D" uid="uid://bt3bemj7mnymj" path="res://assets/2d/reticle.png" id="2_2lquy"]
+
+[resource]
+render_priority = 6
+shader = ExtResource("1_jghpn")
+shader_parameter/scale_offset = 0.1
+shader_parameter/speed = 8.0
+shader_parameter/sprite_texture = ExtResource("2_2lquy")
+shader_parameter/use_billboard = true

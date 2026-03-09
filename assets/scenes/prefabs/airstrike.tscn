@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://csmu1rjrfb5rt"]
+
+[ext_resource type="Script" uid="uid://7c5oipn2o7qg" path="res://assets/scenes/prefabs/airstrike.gd" id="1_m6kbu"]
+[ext_resource type="PackedScene" uid="uid://bmhkte6mfwgf8" path="res://assets/scenes/prefabs/explosion.tscn" id="2_oryih"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7e0fx"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.3019608)
+emission_enabled = true
+emission = Color(2.8845115, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m6kbu"]
+material = SubResource("StandardMaterial3D_7e0fx")
+top_radius = 5.0
+bottom_radius = 5.0
+height = 30.0
+
+[node name="Airstrike" type="Node3D"]
+script = ExtResource("1_m6kbu")
+explosion = ExtResource("2_oryih")
+offset = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.636992, 0)
+mesh = SubResource("CylinderMesh_m6kbu")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

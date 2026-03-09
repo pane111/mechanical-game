@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://7cj6vax1yifm"]
+
+[ext_resource type="Script" uid="uid://do2oftyxxymh6" path="res://assets/scenes/prefabs/lasergun.gd" id="1_h58p7"]
+[ext_resource type="PackedScene" uid="uid://dqyqijxnxoup7" path="res://assets/3d/rocketlauncher.fbx" id="2_r7ewf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h58p7"]
+shading_mode = 0
+albedo_color = Color(0.23310223, 0.5069908, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r7ewf"]
+material = SubResource("StandardMaterial3D_h58p7")
+top_radius = 0.1
+bottom_radius = 0.1
+
+[node name="Lasergun" type="Node3D"]
+script = ExtResource("1_h58p7")
+
+[node name="rocketlauncher" parent="." instance=ExtResource("2_r7ewf")]
+
+[node name="ShotPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6048976, 1.3312846, -1.0838816)
+
+[node name="Beam" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CylinderMesh_r7ewf")

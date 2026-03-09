@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://t3g850xjw21h"]
+
+[ext_resource type="Script" uid="uid://bt1flt7y4w6v4" path="res://assets/scenes/prefabs/rotatingobject.gd" id="1_8oaxa"]
+[ext_resource type="PackedScene" uid="uid://hpv2eu3kq3cy" path="res://assets/3d/itembox.fbx" id="1_r8tcc"]
+[ext_resource type="Script" uid="uid://dq3rr1fc4eymm" path="res://assets/scenes/prefabs/pickup.gd" id="1_x1tu2"]
+[ext_resource type="PackedScene" uid="uid://dt241ol7wgcny" path="res://assets/scenes/prefabs/rocket_launcher.tscn" id="2_0tcp4"]
+[ext_resource type="PackedScene" uid="uid://b2lqqt4mgtlxu" path="res://assets/scenes/prefabs/airstrikegun.tscn" id="3_uk5pu"]
+[ext_resource type="PackedScene" uid="uid://7cj6vax1yifm" path="res://assets/scenes/prefabs/lasergun.tscn" id="4_qvqqt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8oaxa"]
+radius = 1.1519779
+
+[node name="Pickup" type="Area3D"]
+collision_layer = 32
+input_ray_pickable = false
+script = ExtResource("1_x1tu2")
+posssible_items = Array[PackedScene]([ExtResource("2_0tcp4"), ExtResource("3_uk5pu"), ExtResource("4_qvqqt")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8oaxa")
+
+[node name="Pivot" type="Node3D" parent="."]
+script = ExtResource("1_8oaxa")
+
+[node name="itembox" parent="Pivot" instance=ExtResource("1_r8tcc")]
+
+[node name="ReactivateTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ReactivateTimer" to="." method="_on_reactivate_timer_timeout"]

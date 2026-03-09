@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://bics5ajb5y7hq"]
+
+[ext_resource type="Script" uid="uid://ck7fwce0184cn" path="res://assets/scenes/player.gd" id="1_rwm0n"]
+[ext_resource type="PackedScene" uid="uid://bwd2tmi2xyh6w" path="res://assets/scenes/prefabs/playerbullet.tscn" id="2_4wcc8"]
+[ext_resource type="PackedScene" uid="uid://du53bkmn1vsbn" path="res://assets/scenes/models/testrobot.tscn" id="2_s027a"]
+[ext_resource type="PackedScene" uid="uid://c52y77nheydkv" path="res://assets/3d/gun.fbx" id="3_14505"]
+[ext_resource type="Texture2D" uid="uid://dl4pblskhu8ja" path="res://assets/2d/hpbar_under.png" id="5_0hrit"]
+[ext_resource type="Texture2D" uid="uid://bt3bemj7mnymj" path="res://assets/2d/reticle.png" id="5_o5c66"]
+[ext_resource type="Texture2D" uid="uid://du0sbqvhc47vk" path="res://assets/2d/hpbar_over.png" id="6_o5c66"]
+[ext_resource type="Texture2D" uid="uid://dli6g0amn36cp" path="res://assets/2d/hpbar.png" id="7_tc801"]
+[ext_resource type="Texture2D" uid="uid://b0nje4xcgcgme" path="res://assets/2d/ui_element.png" id="9_tc801"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ysycn"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam", "look_model", "hand_model", "move_model", "shot_point")]
+collision_mask = 60
+script = ExtResource("1_rwm0n")
+cam = NodePath("CamPivot/Camera3D")
+look_model = NodePath("Model/testrobot/mesh/upperbody")
+hand_model = NodePath("Model/testrobot/mesh/upperbody/hand_right")
+move_model = NodePath("Model/testrobot/mesh/lowerbody")
+bullet_prefab = ExtResource("2_4wcc8")
+shot_point = NodePath("Model/testrobot/mesh/upperbody/hand_right/shot_point")
+turnspeed = 0.1
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ysycn")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="testrobot" parent="Model" instance=ExtResource("2_s027a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32401848, 0)
+
+[node name="gun" parent="Model/testrobot/mesh/upperbody/hand_right" index="0" instance=ExtResource("3_14505")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 9.021125e-09, 0.120582044, 0.10318965)
+
+[node name="shot_point" type="Node3D" parent="Model/testrobot/mesh/upperbody/hand_right" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2372312, -1.1979698)
+
+[node name="MouseFinder" type="Node3D" parent="."]
+
+[node name="Reticle" type="Sprite3D" parent="MouseFinder"]
+pixel_size = 0.02
+billboard = 1
+no_depth_test = true
+texture_filter = 2
+render_priority = 1
+texture = ExtResource("5_o5c66")
+
+[node name="ShotCd" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="CamPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5560036, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.99329025, 0.115647964, 0, -0.115647964, 0.99329025, 0, -1.1609774, 8.382133)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+value = 100.0
+texture_under = ExtResource("5_0hrit")
+texture_over = ExtResource("6_o5c66")
+texture_progress = ExtResource("7_tc801")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.73125
+anchor_top = 0.76296294
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Item1bg" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_tc801")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Item1bg"]
+layout_mode = 0
+anchor_left = 0.73046875
+anchor_top = 0.078125
+anchor_right = 0.88671875
+anchor_bottom = 0.265625
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "Q"
+metadata/_edit_use_anchors_ = true
+
+[node name="Item2bg" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_tc801")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Item2bg"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73046875
+anchor_top = 0.078125
+anchor_right = 0.88671875
+anchor_bottom = 0.265625
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "E"
+metadata/_edit_use_anchors_ = true
+
+[node name="LegTarget" type="Node3D" parent="."]
+
+[connection signal="timeout" from="ShotCd" to="." method="_on_shot_cd_timeout"]
+
+[editable path="Model/testrobot"]

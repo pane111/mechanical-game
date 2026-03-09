@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TrenchBroomGameConfig" load_steps=7 format=3 uid="uid://cxugd6q434gnu"]
+
+[ext_resource type="Resource" uid="uid://b4xhdj0e16lop" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_clip.tres" id="1_g38fy"]
+[ext_resource type="Resource" uid="uid://ca7377sfgj074" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_skip.tres" id="2_5suhi"]
+[ext_resource type="Resource" uid="uid://bkjxc54mmdhbo" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_origin.tres" id="3_48myo"]
+[ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="4_sp2kj"]
+[ext_resource type="Texture2D" uid="uid://decwujsyhj0qy" path="res://addons/func_godot/icon32.png" id="5_5u0s3"]
+[ext_resource type="Script" uid="uid://cx44c4vnq8bt5" path="res://addons/func_godot/src/trenchbroom/trenchbroom_game_config.gd" id="6_r1svb"]
+
+[resource]
+script = ExtResource("6_r1svb")
+game_name = "MGame"
+metadata/_custom_type_script = "uid://cx44c4vnq8bt5"

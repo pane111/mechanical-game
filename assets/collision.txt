@@ -1,0 +1,6 @@
+1: Player
+2: Player projectiles
+3: Enemies
+4: Enemy projectiles
+5: Terrain
+6: Pickups

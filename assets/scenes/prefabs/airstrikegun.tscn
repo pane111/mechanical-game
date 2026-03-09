@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2lqqt4mgtlxu"]
+
+[ext_resource type="Script" uid="uid://crrir552ybbg5" path="res://assets/scenes/prefabs/airstrike_launcher.gd" id="1_60dtm"]
+[ext_resource type="PackedScene" uid="uid://cnugrijmcydhh" path="res://assets/3d/airstrike.fbx" id="1_abjsb"]
+[ext_resource type="PackedScene" uid="uid://csmu1rjrfb5rt" path="res://assets/scenes/prefabs/airstrike.tscn" id="2_x2jxu"]
+
+[node name="airstrikegun" type="Node3D"]
+script = ExtResource("1_60dtm")
+projectile = ExtResource("2_x2jxu")
+
+[node name="airstrike" parent="." instance=ExtResource("1_abjsb")]

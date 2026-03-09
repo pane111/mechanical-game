@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt241ol7wgcny"]
+
+[ext_resource type="Script" uid="uid://bt26luff3xerc" path="res://rocket_launcher.gd" id="1_loncf"]
+[ext_resource type="PackedScene" uid="uid://b0x236md0xvkj" path="res://assets/scenes/prefabs/player_rocket.tscn" id="2_g5c1w"]
+[ext_resource type="Texture2D" uid="uid://dl5j7ff1py4ty" path="res://assets/2d/rocket.png" id="3_g5c1w"]
+[ext_resource type="PackedScene" uid="uid://bwgcg5giu6pwm" path="res://assets/3d/bomblauncher.fbx" id="4_g5c1w"]
+
+[node name="RocketLauncher" type="Node3D"]
+script = ExtResource("1_loncf")
+projectile = ExtResource("2_g5c1w")
+_speed = 35.0
+icon = ExtResource("3_g5c1w")
+
+[node name="ShotPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.66271013, 1.9770223, -0.7019156)
+
+[node name="bomblauncher" parent="." instance=ExtResource("4_g5c1w")]
