@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 const SPEED = 9.0
-const JUMP_VELOCITY = 12.0
+const JUMP_VELOCITY = 18.0
 const RAY_LENGTH = 50.0
 
 @export var cam: Camera3D
@@ -15,12 +15,14 @@ const RAY_LENGTH = 50.0
 @export var shot_point: Node3D
 @onready var cpivot = $CamPivot
 @onready var reticle = $MouseFinder/Reticle
+@export var gravityscale = 1.0
 
 var item1
 var item2
 @export var rotatespeed = 0.4
 @export var turnspeed = 0.5
 var can_shoot = true
+var lmp2
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -33,9 +35,14 @@ func spawnbullet(_speed):
 	newb.linear_velocity = -hand_model.global_basis.z * _speed
 	$ShotCd.start()
 	can_shoot=false
+	await $ShotCd.timeout
+	if Input.is_action_pressed("click"):
+		spawnbullet(_speed)
+	else:
+		can_shoot=true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("click") && can_shoot:
+	if Input.is_action_just_pressed("click") && can_shoot:
 		spawnbullet(60.0)
 	
 	if Input.is_action_just_pressed("mwheeldown"):
@@ -47,11 +54,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("e") && item2 != null:
 		item2.on_use($MouseFinder.global_position)
 	
+	if Input.is_action_just_pressed("rclick"):
+		lmp2 = get_viewport().get_mouse_position()
+		
+	if Input.is_action_just_released("rclick"):
+		Input.warp_mouse(lmp2)
 	
 	if event is InputEventMouseMotion:
 		if Input.is_action_pressed("rclick"):
 			var mpos = event.relative
 			cpivot.rotate_y(deg_to_rad(-mpos.x) * rotatespeed)
+			
+	
 			
 
 func _physics_process(delta: float) -> void:
@@ -60,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * gravityscale
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -83,15 +97,20 @@ func _physics_process(delta: float) -> void:
 	
 	var viewport := get_viewport()
 	var mouse_position := viewport.get_mouse_position()
+	var origin = Vector2.ZERO
+	var end = Vector2.ZERO
+	if Input.is_action_pressed("rclick"):
+		mouse_position = lmp2
+	origin = cam.project_ray_origin(mouse_position)
+	end = origin + cam.project_ray_normal(mouse_position) * RAY_LENGTH
 	
-	
-	var origin = cam.project_ray_origin(mouse_position)
-	var end = origin + cam.project_ray_normal(mouse_position) * RAY_LENGTH
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(origin,end)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	
+	
+		
 	if result:
 		$MouseFinder.global_position = result.position
 		if result.collider.is_in_group("enemy"):
@@ -110,6 +129,3 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	
-
-func _on_shot_cd_timeout() -> void:
-	can_shoot=true

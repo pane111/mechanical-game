@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://vv68gtjexkq1"]
+[gd_scene load_steps=4 format=3 uid="uid://vv68gtjexkq1"]
+
+[ext_resource type="Script" uid="uid://iwa8iw556kng" path="res://assets/scenes/prefabs/enemy.gd" id="1_hfc52"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cw3ui"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hfc52"]
 
 [node name="Enemy" type="RigidBody3D" groups=["enemy"]]
 collision_layer = 4
@@ -8,8 +12,13 @@ collision_mask = 19
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+mass = 10.0
+script = ExtResource("1_hfc52")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cw3ui")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_hfc52")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

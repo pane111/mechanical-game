@@ -6,9 +6,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_yksev"]
 radius = 0.19409661
 
-[node name="Playerbullet" type="RigidBody3D"]
+[node name="Playerbullet" type="RigidBody3D" groups=["pbullet"]]
 collision_layer = 2
 collision_mask = 20
+mass = 0.001
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1

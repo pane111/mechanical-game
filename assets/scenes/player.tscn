@@ -14,6 +14,9 @@
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("cam", "look_model", "hand_model", "move_model", "shot_point")]
 collision_mask = 60
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource("1_rwm0n")
 cam = NodePath("CamPivot/Camera3D")
 look_model = NodePath("Model/testrobot/mesh/upperbody")
@@ -21,6 +24,7 @@ hand_model = NodePath("Model/testrobot/mesh/upperbody/hand_right")
 move_model = NodePath("Model/testrobot/mesh/lowerbody")
 bullet_prefab = ExtResource("2_4wcc8")
 shot_point = NodePath("Model/testrobot/mesh/upperbody/hand_right/shot_point")
+gravityscale = 2.0
 turnspeed = 0.1
 metadata/_edit_group_ = true
 

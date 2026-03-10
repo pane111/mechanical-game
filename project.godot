@@ -28,6 +28,7 @@ enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 [global_group]
 
 enemy=""
+pbullet=""
 
 [gui]
 
