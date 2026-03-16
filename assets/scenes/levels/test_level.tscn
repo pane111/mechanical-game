@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=4 uid="uid://b6ye37hqt286r"]
+[gd_scene load_steps=45 format=4 uid="uid://b6ye37hqt286r"]
 
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_nd8wk"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_gd6r1"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_00oio"]
 [ext_resource type="PackedScene" uid="uid://vv68gtjexkq1" path="res://assets/scenes/prefabs/enemy.tscn" id="4_gd6r1"]
 [ext_resource type="PackedScene" uid="uid://bics5ajb5y7hq" path="res://assets/scenes/player.tscn" id="5_00oio"]
+[ext_resource type="PackedScene" uid="uid://t3g850xjw21h" path="res://assets/scenes/prefabs/pickup.tscn" id="6_nll7m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00oio"]
 albedo_texture = ExtResource("3_00oio")
@@ -265,3 +266,18 @@ transform = Transform3D(0.7071069, -1.4901161e-08, -0.70710677, 0.68301266, -0.2
 
 [node name="Player" parent="." instance=ExtResource("5_00oio")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Pickup" parent="." instance=ExtResource("6_nll7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.499447, 2.6562538, 20.718222)
+
+[node name="Pickup2" parent="." instance=ExtResource("6_nll7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.10691, 2.65625, 31.518194)
+
+[node name="Pickup3" parent="." instance=ExtResource("6_nll7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.24567, 2.65625, -11.889709)
+
+[node name="Pickup4" parent="." instance=ExtResource("6_nll7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.766023, 2.6562424, 15.014488)
+
+[node name="Pickup5" parent="." instance=ExtResource("6_nll7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.028621, 2.6562424, 23.147587)

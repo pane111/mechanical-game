@@ -4,8 +4,9 @@ extends RigidBody3D
 
 func explode():
 	var ne = explosion.instantiate()
-	ne.global_position = global_position
+	
 	add_sibling(ne)
+	ne.global_position = global_position
 
 func _on_destroy_timer_timeout() -> void:
 	explode()

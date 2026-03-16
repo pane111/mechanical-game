@@ -2,7 +2,7 @@ extends Node3D
 
 
 @export var icon: Texture2D
-@export var shots = 8
+@export var shots = 3
 @onready var beam = $Beam
 var in_use=false
 var player

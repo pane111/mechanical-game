@@ -5,8 +5,9 @@ extends Node3D
 var player
 func on_use(targetpoint):
 	var newp = projectile.instantiate()
-	newp.global_position = targetpoint
+	
 	player.add_sibling(newp)
+	newp.global_position = targetpoint
 	shots-= 1
 	if shots <= 0:
 		queue_free()
